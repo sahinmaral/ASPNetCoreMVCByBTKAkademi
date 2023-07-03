@@ -1,0 +1,23 @@
+@{
+    ViewData["Title"] = "Access Denied";
+}
+
+<div class="text-center text-danger my-5">
+    <h3 class="display-3">
+        <i class="fa fa-solid fa-bug-slash"></i>
+        <br />
+        Access Denied
+    </h3>
+</div>
+
+<div class="text-center">
+    <div class="lead">
+        You have no permission to access this page. Please get in touch with system administrator.
+    </div>
+
+    <div class="btn-group my-5">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Home</a>
+        <a asp-controller="Product" asp-action="Index" class="btn btn-outline-secondary">Product</a>
+        <a asp-page="/Contact" class="btn btn-outline-secondary">Contact Us</a>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+@{
+  ViewData["Title"] = "Create User";
+}
+
+@model UserDtoForCreation
+
+<div class="text-center">
+  <div class="display-6 mb-3">Create User</div>
+</div>
+
+<form method="post">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group my-3">
+                <label asp-for="Username">Username</label>
+                <input  asp-for="Username" class="form-control">
+            </div>
+
+            <div class="form-group my-3">
+                <label asp-for="Email">Email</label>
+                <input asp-for="Email" class="form-control">
+            </div>
+
+            <div class="form-group my-3">
+                <label asp-for="Password">Password</label>
+                <input asp-for="Password" class="form-control">
+            </div>
+
+            <div class="form-group my-3">
+                <label asp-for="PhoneNumber">Phone Number</label>
+                <input asp-for="PhoneNumber" class="form-control">
+            </div>
+
+            <div class="form-group my-3">
+                <div class="btn-group d-flex justify-content-end">
+                    <input type="submit" class="btn btn-primary" />
+                    <a asp-action="Index" class="btn btn-outline-primary">
+                        <i class="fa-solid fa-arrow-left"></i>Back
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="lead p-2 mt-2">
+                Roles
+                @foreach (var role in Model.Roles)
+                {
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="Roles" value="@role">
+                        <label class="form-check-label" name="Roles">
+                            @role
+                        </label>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</form>

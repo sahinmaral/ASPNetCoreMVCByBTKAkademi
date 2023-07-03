@@ -1,0 +1,14 @@
+@model List<Product>
+
+<div class="text-center">
+    <h3 class="display-5">Showcase</h3>
+</div>
+
+<div class="row">
+    @foreach (Product product in Model)
+    {
+        <div class="col-sm-6 my-2">
+            <partial name="_ProductCard" model="@product" />
+        </div>
+    }
+</div>

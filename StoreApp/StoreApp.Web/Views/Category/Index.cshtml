@@ -1,0 +1,14 @@
+@{
+    ViewData["Title"] = "Categories";
+}
+
+@model List<Category>
+
+<h6 class="text-center display-6 my-3">Categories</h6>
+
+<ul class="list-group">
+    @foreach (Category category in Model)
+    {
+        <li class="list-group-item">@category.Name</li>
+    }
+</ul>

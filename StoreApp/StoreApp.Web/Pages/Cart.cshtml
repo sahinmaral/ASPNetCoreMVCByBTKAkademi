@@ -1,0 +1,59 @@
+@page "/cart"
+@model CartModel
+
+<div>
+    <h1 class="text-center lead display-6">
+        Cart
+    </h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Subtotal</th>
+                <th>Processes</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cartLine in Model.Cart?.CartLines?? Enumerable.Empty<CartLine>())
+            {
+                <tr>
+                    <th>@cartLine.Product.Name</th>
+                    <td>@cartLine.Quantity</td>
+                    <td>₺ @cartLine.Product.Price</td>
+                    <td>₺ @(((cartLine.Product.Price * cartLine.Quantity)))</td>
+                    <td>
+                        <form method="post" asp-page-handler="Remove">
+                            <input type="hidden" name="id" value="@cartLine.Product.Id" />
+                            <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+                            <button type="submit" class="btn btn-sm btn-danger">
+                                <i class="fa fa-trash"></i> Remove
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-right">Total </td>
+                <td class="text-right text-danger">@Model.Cart?.ComputeTotalValue().ToString("C")</td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div class="text-center  my-3">
+        <div class="btn-group">
+            <a class="btn btn-primary" href="@Model?.ReturnUrl">
+                Continue to Shopping
+            </a>
+
+            <a class="btn btn-outline-primary" asp-controller="Order" asp-action="Checkout">
+                Checkout
+            </a>
+        </div>
+    </div>
+</div>

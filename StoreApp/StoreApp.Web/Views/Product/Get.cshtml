@@ -1,0 +1,42 @@
+@model Product
+
+@{
+  ViewData["Title"] = $"{Model.Name} - Products";
+}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="text-center">
+      <h6 class="display-6">@Model.Name</h6>
+
+      <img class="img-fluid shadow rounded-3" src="~/images/@Model.ImageUrl" />
+
+      <p class="lead text-danger">@Model.Price.ToString("C")</p>
+
+      <p class="lead">@Model.Description</p>
+    </div>
+  </div>
+</div>
+
+<div class="text-center">
+  <div class="btn-group">
+    <a class="btn btn-primary" asp-controller="Home" asp-action="Index">
+      <i class="fa-solid fa-house"></i> Home
+    </a>
+    <form id="@Model.Id" asp-page="/cart" method="post">
+      <input type="hidden" asp-for="Id" />
+      <input
+        type="hidden"
+        name="returnUrl"
+        value="@ViewContext.HttpContext.Request.PathAndQuery()"
+      />
+      <button type="submit" class="btn btn-outline-primary">
+        <i class="fa fa-cart-plus"></i> Add to cart
+      </button>
+    </form>
+    <a class="btn btn-outline-primary" asp-controller="Product" asp-action="Index">
+      <i class="fa-solid fa-list"></i> Products
+    </a>
+  </div>
+</div>
+

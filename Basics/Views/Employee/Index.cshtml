@@ -1,0 +1,14 @@
+@{
+    ViewData["Title"] = "Index";
+}
+
+@model string[]
+
+<div>Employee/Index</div>
+
+<ul class="list-group">
+    @foreach (string username in Model)
+    {
+        <li class="list-group-item">@username</li>
+    }
+</ul>

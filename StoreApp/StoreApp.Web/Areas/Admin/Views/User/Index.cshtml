@@ -1,0 +1,52 @@
+@{
+  ViewData["Title"] = "Users";
+}
+
+@model List<IdentityUser>
+
+<div class="text-center">
+  <div class="display-6 mb-3">Users</div>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Username</th>
+      <th>Roles</th>
+      <th>Operations</th>
+    </tr>
+  </thead>
+  <tbody>
+        @foreach (IdentityUser user in Model)
+        {
+        <tr>
+          <td>@user.Id</td>
+          <td>@user.UserName</td>
+          <td user-role="" user-name="@user.UserName"></td>
+          <td>
+            <div class="btn-group">
+              <a
+              asp-action="Update"
+              asp-controller="User"
+              asp-area="Admin"
+              asp-route-username="@user.UserName"
+              class="btn btn-sm btn-warning rounded-0">Update</a>
+              <a
+              asp-action="ResetPassword"
+              asp-controller="User"
+              asp-area="Admin"
+              asp-route-username="@user.UserName"
+              class="btn btn-sm btn-info rounded-0">Reset Password</a>
+
+              <form method="post" asp-action="DeleteUser">
+                <input type="hidden" name="username" value="@user.UserName">
+                <button type="submit" class="btn btn-sm btn-danger rounded-0">Delete</button>
+              </form>
+
+            </div>
+          </td>
+        </tr>
+        }
+  </tbody>
+</table>

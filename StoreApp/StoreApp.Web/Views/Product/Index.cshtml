@@ -1,0 +1,26 @@
+@model ProductListViewModel
+
+@{
+  ViewData["Title"] = "Products";
+}
+
+<div class="row">
+    <div class="col-md-3 mt-2">
+        @await Component.InvokeAsync("CategorySidebar")
+        @await Component.InvokeAsync("ProductFilter")
+        <div latest-products="" number="3"></div>
+    </div>
+
+    <div class="col-md-9">
+      <div class="row">
+        @foreach (var product in Model.Products)
+        {
+          <div class="col-sm-6 my-1">
+            @Html.Partial("_ProductCard",model:product)
+          </div>
+        }
+      </div>
+      <div page-model="@Model.Pagination" page-action="Index"></div>
+    </div>
+</div>
+

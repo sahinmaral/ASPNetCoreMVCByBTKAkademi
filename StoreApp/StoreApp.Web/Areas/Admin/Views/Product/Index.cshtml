@@ -1,0 +1,82 @@
+@{
+    ViewData["Title"] = "Products";
+}
+
+@model ProductListViewModel
+
+<div class="d-flex justify-content-between">
+    <h4>Products</h4>
+
+    <a class="btn btn-outline-success" asp-action="Create" asp-controller="Product">
+        <i class="fa fa-plus"></i>
+        Create
+    </a>
+</div>
+
+<div class="row">
+    <div class="col-md-3 mt-2">
+        @await Component.InvokeAsync("CategorySidebar")
+        @await Component.InvokeAsync("ProductFilter")
+        <div latest-products="" number="3"></div>
+    </div>
+
+    <div class="col-md-9">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Showcase</th>
+            <th>Category Name</th>
+            <th>Processes</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach (var product in Model.Products)
+          {
+              <tr>
+                  <th scope="row">@product.Id</th>
+                  <td><img src="~/images/@product.ImageUrl" width="50" class="border border-light rounded"/></td>
+                  <td>@product.Name</td>
+                  <td>@product.Price.ToString("C")</td>
+                  <td>
+                    <div class="form-check form-switch ">
+                      <input class="form-check-input" disabled type="checkbox" asp-for="@product.CanBeShownInShowcase">
+                    </div>
+                  </td>
+                  <td>@product.Category.Name</td>
+                  <td>
+                      <div class="btn-group" role="group">
+                        <a data-toggle="tooltip" data-placement="top" title="Edit" class="btn btn-warning" asp-action="Edit" asp-controller="Product" asp-route-id="@product.Id">
+                          <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Delete" class="btn btn-danger" asp-action="Delete" asp-controller="Product" asp-route-id="@product.Id">
+                          <i class="fa-solid fa-trash"></i>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Details" class="btn btn-primary" asp-area="" asp-route-id="@product.Id" asp-action="Get" asp-controller="Product" asp-route-id="@product.Id">
+                          <i class="fa-solid fa-magnifying-glass"></i>
+                        </a>
+                      </div>
+                  </td>
+              </tr>
+          }
+        </tbody>
+      </table>
+      <div page-model="@Model.Pagination" page-action="Index"></div>
+    </div>
+</div>
+
+
+
+@section Scripts
+{
+  <script type="text/javascript">
+    $(document).ready(() => {
+      $('[data-toggle="tooltip"]').tooltip();
+    })
+  </script>
+}
+
+

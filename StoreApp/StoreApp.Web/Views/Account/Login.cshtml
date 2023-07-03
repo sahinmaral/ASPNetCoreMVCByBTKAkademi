@@ -1,0 +1,44 @@
+@{
+    ViewData["Title"] = "Login";
+}
+
+@model LoginViewModel
+
+<div class="text-center">
+    <h6 class="display-6">Login</h6>
+</div>
+
+<div class="row-">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 offset-md-3">
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <input type="hidden" asp-for="ReturnUrl">
+
+            <div class="form-group my-2">
+                <label asp-for="Name">Name</label>
+                <input type="text" asp-for="Name" class="form-control">
+            </div>
+
+            <div class="form-group my-2">
+                <label asp-for="Password">Password</label>
+                <input type="password" asp-for="Password" class="form-control">
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 py-2">
+                Login
+            </button>
+        </form>
+
+        <div class="my-2">
+            If you don't have an account. Please click here to achieve
+            <a
+            asp-route-returnUrl="@Model.ReturnUrl"
+            asp-action="Register"
+            asp-controller="Account"
+            asp-area=""> registration page </a>
+        </div>
+    </div>
+</div>
+
